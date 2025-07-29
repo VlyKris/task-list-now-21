@@ -1,13 +1,17 @@
-# CodeSandbox supports debian & ubuntu based images
-# This universal image contains almost all languages and tools
-FROM ghcr.io/codesandbox/devcontainers/universal:latest
+FROM node:20-slim AS builder
+RUN npm install -g pnpm@10.2.0
 
-# Example: install htop by default
-# RUN apt update -y && apt install -y htop
+RUN apt-get update && apt-get install -y jc
 
-# The project will be mounted in /workspace by default
+RUN npm install @dotenvx/dotenvx --global
 
-# Every new shell will open inside the built container
+RUN npm install jwt-keygen --global
 
-# On top of this build, we install `zsh`, `git` and `docker` as additional
-# Docker layers.
+# write the contents of the CONVEX_TOKEN environment variable to ~/.convex/config.json as is
+RUN mkdir -p $HOME/.convex
+RUN echo "{\"accessToken\":\"eyJ2MiI6ImQ2MTNjMWRmOTU0OTQ1NzU4NzM3YWIxNWY4OThlZGNmIn0=\"}"> $HOME/.convex/config.json
+
+RUN apt-get update && apt-get install -y git
+RUN git config --global user.email "agent@vly.ai"
+RUN git config --global user.name "Vly Agent"
+RUN git config --global init.defaultBranch main

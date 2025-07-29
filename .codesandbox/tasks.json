@@ -1,7 +1,54 @@
 {
-  // These tasks will run in order when initializing your CodeSandbox project.
-  "setupTasks": [],
-
-  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
-  "tasks": {}
+  "setupTasks": [
+    // "bash preload-deps.sh",
+    "pwd",
+    "ls -al",
+    "bash -c 'if [[ -f codebase/.gitignore.txt ]]; then mv codebase/.gitignore.txt codebase/.gitignore; fi'",
+    "bash -c 'if [[ -f codebase/.env.example ]]; then mv codebase/.env.example codebase/.env.local; fi'",
+    "bash -c 'cd codebase && pnpm install'",
+    "bash setup-convex.sh",
+    "cd codebase && bash set-convex-jwt-env.sh"
+  ],
+  "tasks": {
+    "dev": {
+      "name": "dev-server",
+      "command": "cd codebase && pnpm dev",
+      "runAtStart": true,
+      "preview": {
+        "port": 5173
+      },
+      "restartOn": {
+        "files": ["codebase/package.json", "codebase/pnpm-lock.yaml"],
+        "clone": true,
+        "resume": false
+      }
+    },
+    "convex-dev": {
+      "name": "convex-dev",
+      "command": "cd codebase && npx convex dev",
+      "runAtStart": true,
+      "restartOn": {
+        "clone": true,
+        "resume": false
+      }
+    },
+    "convex-setup": {
+      "name": "convex-setup",
+      "command": "bash setup-convex.sh",
+      "runAtStart": false,
+      "restartOn": {
+        "clone": true,
+        "resume": false
+      }
+    },
+    "git-setup": {
+      "name": "git-setup",
+      "command": "cd codebase && git init && git config user.email \"support@vly.ai\" && git config user.name \"vly.ai\" && git add . && git commit -m \"Initial commit\"",
+      "runAtStart": true,
+      "restartOn": {
+        "clone": false,
+        "resume": false
+      }
+    }
+  }
 }
