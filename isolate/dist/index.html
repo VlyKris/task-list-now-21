@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task List Now</title>
+  <script type="module" crossorigin src="/assets/index-BeC_IDx3.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DaIFdIOr.css">
+</head>
+
+
+<body>
+  <div id="root"></div>
+
+<script>
+(function injectVlyBranding(force) {
+    if (!force && !window.location.hostname.endsWith('.vly.site')) return;
+    if (document.getElementById('vly-branding')) return;
+
+    // Load Geist font if not already loaded
+    if (!document.getElementById('geist-font')) {
+      var link = document.createElement('link');
+      link.id = 'geist-font';
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&display=swap';
+      document.head.appendChild(link);
+    }
+
+    // Inject hover style if not already present
+    if (!document.getElementById('vly-branding-style')) {
+      var style = document.createElement('style');
+      style.id = 'vly-branding-style';
+      style.innerHTML = `
+        #vly-branding {
+          transition: transform 0.18s cubic-bezier(.25,.8,.25,1), box-shadow 0.18s cubic-bezier(.25,.8,.25,1);
+        }
+        #vly-branding:hover {
+          transform: scale(1.045);
+          box-shadow: 0 12px 40px 0 rgba(176,106,122,0.28);
+        }
+        @media (max-width: 768px) {
+          #vly-branding {
+            padding: 12px 20px !important;
+            font-size: 0.9rem !important;
+          }
+          #vly-branding svg {
+            width: 40px !important;
+            height: 34px !important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    var branding = document.createElement('div');
+    branding.id = 'vly-branding';
+    branding.style = [
+      'position:fixed',
+      'bottom:24px',
+      'right:24px',
+      'background:rgba(255,255,255,0.75)',
+      'border:1.5px solid rgba(255,255,255,0.35)',
+      'border-radius:18px',
+      'padding:14px 32px',
+      'box-shadow:0 8px 32px 0 rgba(176,106,122,0.18)',
+      'z-index:9999',
+      'font-weight:600',
+      'color:#b06a7a',
+      'font-family:Geist, sans-serif',
+      'font-size:1.08rem',
+      'backdrop-filter:blur(8px)',
+      'transition:all 0.3s cubic-bezier(.25,.8,.25,1)',
+      'display:flex',
+      'align-items:center',
+      'gap:10px',
+      'cursor:pointer',
+    ].join(';');
+    var birdSvg =
+      '<svg width="52" height="44" viewBox="0 0 66 58" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:12px;"><path d="M0 0L24.3446 32.5366L34.9092 17.2087L0 0Z" fill="#A37FBC"/><path d="M55.8515 9.25636L37.6835 10.729L47.0393 25.3604L55.8515 9.25636Z" fill="#A37FBC"/><path d="M37.6835 10.729L29.8231 24.7561L47.1622 25.2276L37.6835 10.729Z" fill="#A37FBC"/><path d="M47.7972 23.8958L31.8665 24.8137L40.5733 38.4309L47.7972 23.8958Z" fill="#A37FBC"/><path d="M30.3087 20.2175L19.9977 38.4309L40.5965 38.3719L30.3087 20.2175Z" fill="#A37FBC"/><path d="M40.6262 38.3482L20.1133 38.4309L24.8732 58L40.6262 38.3482Z" fill="#A37FBC"/><path d="M66 7.29198L53.1592 9.47663L53.8307 12.008L66 7.29198Z" fill="#A37FBC"/></svg>';
+    var badgeContent =
+      '<a href="https://vly.ai" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#A37FBC;width:100%;height:100%;">' +
+      birdSvg +
+      '<span class="branding-text" style="font-weight:500;letter-spacing:0.5px;">Powered by vly.ai</span>' +
+      '</a>';
+    branding.innerHTML = badgeContent;
+    document.body.appendChild(branding);
+  
+})(/*force=*/false);
+</script>
+</body>
+
+
+</html>
